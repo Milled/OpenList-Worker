@@ -27,6 +27,13 @@
   "main": "src/backend/worker.ts",
   "compatibility_date": "2026-08-04",
   "compatibility_flags": ["nodejs_compat"],
+
+  // Workers Logs（可观测性）：开启后 Cloudflare 会记录每次请求的日志与异常，
+  // 在 Dashboard「Workers → 你的 Worker → 观察 → 日志」里可查。不开的话线上
+  // 出 5xx 只能看到状态码，没有任何日志可追（2026-10-26 那次存储后端 503 就是
+  // 这样排查的）。同一文件里的 vars / 绑定在每次 deploy 时被覆盖，本项也一样，
+  // 所以必须写在这里而不是只在控制台点开关。
+  "observability": { "enabled": true },
   "workers_dev": false,
   "preview_urls": false,
 
